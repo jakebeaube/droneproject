@@ -5,12 +5,9 @@ var methodOverride = require("method-override");
 // Requiring our models for syncing
 var db = require("./models");
 
-var PORT = process.env.PORT || 3000;
+// var PORT = process.env.PORT;
 
 var app = express();
-
-// Override with POST having ?_method=DELETE
-app.use(methodOverride("_method"));
 
 // Set Handlebars.
 var exphbs = require("express-handlebars");
@@ -35,24 +32,18 @@ xAdmin.init(config, function(err, admin) {
   }));
 
   // uncomment when handlebars are made ----
-  // app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-  // app.set("view engine", "handlebars");
+  app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+  app.set("view engine", "handlebars");
 
   // Import routes and give the server access to them.
   var routes = require("./controllers/drone_controller.js");
   // site routes
   app.use("/", routes);
-  app.use("/single/:id", routes);
-  app.get('/', function(req, res) {
-    res.send('Hello World');
-  });
 
   // site server
   db.sequelize.sync({}).then(function() {
-    app.listen(PORT, function() {
-      console.log("App listening on PORT " + PORT);
+    app.listen(process.env.PORT || 3000, function(){
+      console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
     });
   });
 });
-
-//

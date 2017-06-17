@@ -5,12 +5,30 @@ var drones = require("../models/drones.js");
 var db = require("../models");
 
 router.get("/", function(req, res) {
-  res.render("index");
+  res.render("title", {layout: 'titleLayout'});
 });
 
-router.post("/", function(req, res) {
-  //  console.log(req.body.price, req.body.camera, req.body.flight)
+router.get("/quiz", function(req, res) {
+  res.render("quiz", {layout: 'quizLayout'});
+});
 
+router.get("/:page_name", function(req, res) {
+  db.Content.findOne({
+    where: {
+      page_name: req.params.page_name
+    }
+  }).then(function(data) {
+    var hbsObject = {
+      content: data
+    };
+    res.render("content", hbsObject);
+    console.log(hbsObject.content.header);
+    console.log(hbsObject.content.text);
+  });
+});
+
+router.post("/results", function(req, res) {
+  //  console.log(req.body.price, req.body.camera, req.body.flight)
   if (req.body.price == 1) {
     var priceRange = [0, 100];
   } else if (req.body.price == 2) {
@@ -22,7 +40,7 @@ router.post("/", function(req, res) {
   var seeing = req.body.camera;
   var iFlight = req.body.flight;
 
-  db.Drones.findAll({
+  db.drones.findAll({
     where: {
       //           id: [1, 16]
       price: {
@@ -39,22 +57,19 @@ router.post("/", function(req, res) {
     var convert = {
       drones: dbDrones
     };
-    console.log(dbDrones);
-    res.render("index", convert);
+  //  console.log(dbDrones);
+    res.render("results", convert);
   });
 });
 
-router.post("/single/:id", function(req, res) {
-  db.Drones.findOne({
+router.get("/drone/:drone_name", function(req, res) {
+  db.drones.findOne({
     where: {
-      id: (req.params.id)
+      drone_name: req.params.drone_name
     },
-    attributes: ["drone_name", "price", "camera", "weight", "picture_large"]
+    // attributes: ["drone_name", "price", "camera", "weight", "picture_large"]
   }).then(function(theDrone) {
-
-    //  db.Drones.findById(req.parmas.id)
-    //    console.log(req.params.id);
-    //    .then(function(theDrone) {
+    console.log(req.params);
 
     var convert = {
       single: theDrone.dataValues

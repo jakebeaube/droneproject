@@ -1,0 +1,93 @@
+<div class="headerbox"></div>
+<div class="image-container" style="background-image:url(" {{ single.picture_large }} ");background-size:auto 600px; background-attachment: fixed;">
+  <img src="{{single.picture_large}}">
+  <div class="drone-name">
+    {{single.drone_name}}
+  </div>
+</div><br><br>
+<section class="content">
+  <h5>Model Price:</h5>${{single.price}}</section>
+<section class="content">
+  {{#if single.camera}}
+    <h5>Camera:</h5> Yes
+  {{else}}
+    <h5>Camera:</h5>No
+  {{/if}}
+</section>
+<section class="content">
+  <h5>Max camera resolution:</h5> {{single.camera_max}}
+</section>
+<section class="content">
+  {{#if single.video}}
+    <h5>Video:</h5> Yes
+  {{else}}
+    <h5>Video:</h5> No
+  {{/if}}
+</section>
+<section class="content">
+  <h5>Max video resolution: </h5>{{single.video_res}}
+</section>
+<section class="content">
+  <h5>Max video fps:</h5> {{single.video_fps}}
+</section>
+<section class="content">
+  <h5>Max range: </h5>{{single.max_range}}
+</section>
+<section class="content">
+  <h5>Max flight time: </h5>{{single.flight_time}}
+</section>
+<section class="content">
+  {{#if single.gimble}}
+    <h5>Gimbal:</h5> Yes
+  {{else}}
+    <h5>Gimbal:</h5>No
+  {{/if}}
+</section>
+<section class="content">
+  {{#if single.gps}}
+    <h5>GPS:</h5> Yes
+  {{else}}
+    <h5>GPS:</h5> Yes
+  {{/if}}
+</section>
+<section class="content">
+  {{#if single.avoidance}}
+    <h5>Avoidance:</h5> Yes
+  {{else}}
+    <h5>Avoidance:</h5> No
+  {{/if}}
+</section>
+<section class="content">
+  {{#if single.headless}}
+    <h5>Headless:</h5> Yes
+  {{else}}
+    No
+  {{/if}}
+</section>
+<section class="content">
+  {{#if single.altitude}}
+    <h5>Altitude:</h5> Yes
+  {{else}}
+    <h5>Altitude:</h5> No
+  {{/if}}
+</section>
+<section class="content">
+  {{#if single.flips}}
+    <h5>Flips:</h5> Yes
+  {{else}}
+    <h5>Flips:</h5> No
+  {{/if}}
+</section>
+<section class="content">
+  <h5>Max speed: </h5>{{single.max_speed}} kph
+</section>
+<section class="content">
+  <h5>Drone Weight:</h5> {{single.weight}} grams
+</section>
+<section class="content">
+  {{#if single.intelligent_flight}}
+    <h5>Intelligent flight:</h5> Yes
+  {{else}}
+    <h5>Intelligent flight:</h5> No
+  {{/if}}
+</section>
